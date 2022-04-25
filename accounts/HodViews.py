@@ -419,8 +419,8 @@ class SubjectListView(ListView):
     all_subjects = Subject.objects.all()
     all_staff = Staff.objects.all()
     
-    for staff in all_staff:
-        staff = Staff.objects.get(id=staff.id)
+    # for staff in all_staff:
+    #     staff = Staff.objects.get(id=staff.id)
         
         
 

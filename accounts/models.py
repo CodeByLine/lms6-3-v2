@@ -19,6 +19,7 @@ class SessionYearModel(models.Model):
         return reverse('session_detail', kwargs={'pk': self.pk})
 
 class CustomUser(AbstractUser):
+    # pass
     user_type_data = ((1, "HOD"), (2, "Staff"), (3, "Student"))
     user_type = models.PositiveSmallIntegerField(default=1, choices=user_type_data)
 
@@ -36,6 +37,7 @@ class CustomUser(AbstractUser):
         return self.email
 
 class AdminHOD(models.Model):
+    # pass
     id = models.AutoField(primary_key=True)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,6 +46,7 @@ class AdminHOD(models.Model):
 
 
 class Staff(models.Model):
+    # pass
     id = models.AutoField(primary_key=True)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     user_type = "Staff"
