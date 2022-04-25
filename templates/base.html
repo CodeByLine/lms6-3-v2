@@ -1,47 +1,997 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }}</title>
 
-    <!-- Bootstrap -->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome-free/css/all.min.css' %}">
+     <!-- New Font Awesome -->
+    <script src="https://kit.fontawesome.com/267052b840.js" crossorigin="anonymous"></script>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{% static '/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{% static '/plugins/jqvmap/jqvmap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
+      
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTELogo" height="60" width="60">
+  </div>
 
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
-    
-    <!-- Bootstrap core CSS -->
-
-
-  </head>
-  <body>
-    
-
-<div class="container py-3">
-<header>
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
   
-      {% include 'partials/_header.html' %}
-    
+    </ul>
+    <h4 style="margin-top: 0.4rem; margin-left: 1rem;">Admin Control Panel</h4>
+  
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/admin_home" class="nav-link">Home-navbar</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout_user" role="button">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- /.navbar -->
+  <!-- { % include 'hod_templates/sidebar_template.html' with user=user id=id % } -->
+  {% load static %}
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'admin_home' %}" class="brand-link">
+      <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Admin Home Sidebar</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{% url 'admin_profile' %}" class="d-block">{{ user.username }}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item">        <!-- Admin Home -->
+            {% url 'admin_home' as admin_home %}
+            <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}" >
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Admin Home
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">        <!-- add course -->
+
+            {% url 'course_add' as course/add %}
+            <a href="{% url 'course_add' %}" class="nav-link {% if request.path == course_add %} active {% endif %}" >
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>
+                Add Course
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">        <!-- course detail-->
+
+          <li class="nav-item">         <!-- Course List -->
+            {% url 'course_list' as course_list %}
+            {% url 'course_update' course_id=id as course_update %}
+            <a href="{{ course_list }}" class="nav-link {% if request.path == course_list %} active {% endif %} {% if request.path == edit_course %} active {% endif %}" >
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Courses (list)
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">    <!-- add staff -->
+            {% url 'staff_add' as staff_add %}
+            <a href="{{ staff_add }}" class="nav-link {% if request.path == staff_add %} active {% endif %}" >
+              <i class="nav-icon fa fa-user-plus"></i>
+              <p>
+                Add Staff
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">    <!-- staff list -->
+            {% url 'staff_list' as staff_list %}
+            {% url 'staff_add' staff_id=id as staff_add %}
+            <a href="{{ staff_list }}" class="nav-link {% if request.path == staff_list %} active {% endif %} {% if request.path == edit_staff %} active {% endif %}" >
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Staff (list)
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">   <!-- add subject -->
+            {% url 'subject_add' as subject_add %}
+            <a href="{{ subject_add }}" class="nav-link {% if request.path == subject_add %} active {% endif %}" >
+              <i class="nav-icon fas fa-graduation-cap"></i>
+              <p>
+                Add Subject
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">     <!-- subject_list -->
+            {% url 'subject_list' as subject_list %}
+            {% url 'subject_update' subject_id=id as subject_update %}
+            <a href="{{ subject_list }}" class="nav-link {% if request.path == subject_list %} active {% endif %}{% if request.path == edit_subject %} active {% endif %}" >
+              <i class="nav-icon fas fa-list-ol"></i>
+              <p>
+                Subjects (List)
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">         <!-- add session -->
+            {% url 'session_add' as session_add %}
+            <a href="{{ session_add }}" class="nav-link {% if request.path == session_add %} active {% endif %}" >
+              <i class="nav-icon fas fa-calendar-plus"></i>
+              <p>
+                Add Sessions_Year
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">         <!-- session list -->
+            {% url 'session_list' as session_list %}
+            <a href="{{ session_list }}" class="nav-link {% if request.path == session_list %} active {% endif %}" >
+              <i class="nav-icon fas fa-calendar-plus"></i>
+              <p>
+               All Sessions
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">      <!-- add student -->
+            {% url 'add_student' as add_student %}
+
+            <a href="{{ add_student }}" class="nav-link {% if request.path == add_student %} active {% endif %}" >
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>
+                Add Student
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">      <!-- student_list -->
+            {% url 'student_list' as student_list %}
+            {% url 'student_update' id as student_update %}
+            <a href="{{ student_list }}" class="nav-link {% if request.path == student_list %} active {% endif %} {% if request.path == edit_student %} active {% endif %}" >
+
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Student (list)
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">      <!-- student feedback -->
+            {% url 'student_feedback_message' as student_feedback_message %}
+            <a href="{% url 'student_feedback_message' %}" class="nav-link {% if request.path == student_feedback_message %} active {% endif %}" >
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Student Feedback
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">        <!-- staff feedback -->
+            {% url 'staff_feedback_message' as staff_feedback_message %}
+            <a href="{% url 'staff_feedback_message' %}" class="nav-link {% if request.path == staff_feedback_message %} active {% endif %}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Staff Feedback
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">    <!-- student leave view -->
+            {% url 'student_leave_view' as student_leave_view %}
+            <a href="{% url 'student_leave_view' %}" class="nav-link {% if request.path == student_leave_view %} active {% endif %}" >
+              <i class="nav-icon fas fa-walking"></i>
+              <p>
+                Student Leave View
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">    <!-- staff_leave_view -->
+            {% url 'staff_leave_view' as staff_leave_view %}
+            <a href="{% url 'staff_leave_view' %}" class="nav-link {% if request.path == staff_leave_view %} active {% endif %}">
+              <i class="nav-icon fas fa-hiking"></i>
+              <p>
+                Staff Leave View
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">       <!-- admin view attendance -->
+            {% url 'admin_view_attendance' as admin_view_attendance %}
+            <a href="{% url 'admin_view_attendance' %}" class="nav-link {% if request.path == admin_view_attendance %} active {% endif %}">
+              <i class="nav-icon fas fa-calendar-check"></i>
+              <p>
+                View Attendance
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">       <!-- edit_profile_save -->
+            {% url 'admin_profile_save' as admin_profile_save %}
+            <a href="{% url 'admin_profile_save' %}" class="nav-link {% if request.path == admin_profile_save %} active {% endif %}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Admin Profile
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item menu-closed"> <!-- Add'l Elements -->
+            <a href="{% url 'admin_home' %}" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Add'l Elements
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">  <!-- Add'l dashboar -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Layout Options
+                    <i class="fas fa-angle-left right"></i>
+                    <span class="badge badge-info right">6</span>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% static '/pages/layout/top-nav.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Top Navigation</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/top-nav-sidebar.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Top Navigation + Sidebar</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/boxed.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Boxed</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/fixed-sidebar.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fixed Sidebar</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/fixed-sidebar-custom.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fixed Sidebar <small>+ Custom Area</small></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/fixed-topnav.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fixed Navbar</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href= class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fixed Footer</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/layout/collapsed-sidebar.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Collapsed Sidebar</p>
+                    </a>
+                  </li>
+              </ul>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Charts
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% static 'pages/charts/chartjs.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>ChartJS</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/charts/flot.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Flot</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/charts/inline.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Inline</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% static 'pages/charts/uplot.html' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>uPlot</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-tree"></i>
+                  <p>
+                    UI Elements
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% static 'plugins/pages/UI/general.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>General</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'plugins/pages/UI/icons.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Icons</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'plugins/pages/UI/buttons.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Buttons</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'plugins/pages/UI/sliders.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sliders</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'plugins/pages/UI/modals.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Modals & Alerts</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/UI/navbar.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Navbar & Tabs</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/UI/timeline.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Timeline</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/UI/ribbons.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ribbons</p>
+                  </a>
+                </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Forms
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% static 'pages/forms/general.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>General Elements</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/forms/advanced.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Advanced Elements</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/forms/editors.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Editors</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'pages/forms/validation.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Validation</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Tables
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% static '/plugins/pages/tables/simple.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Simple Tables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/tables/data.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/tables/jsgrid.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>jsGrid</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-item">
+            <a href="{% static 'pages/calendar.html' %}" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Calendar
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/gallery.html' %}" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Gallery
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/kanban.html' %}" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                Kanban Board
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                Mailbox
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% static 'pages/mailbox/mailbox.html' %]" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inbox</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/mailbox/compose.html' %]" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Compose</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/mailbox/read-mail.html' %]" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Read</p>
+                </a>
+              </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-book"></i>
+          <p>
+            Pages
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/invoice.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Invoice</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/profile.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Profile</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/e-commerce.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>E-commerce</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/projects.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Projects</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/project-add.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Project Add</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/project-edit.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Project Edit</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/project-detail.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Project Detail</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/contacts.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Contacts</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/faq.html' %]" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>FAQ</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/contact-us.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Contact us</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon far fa-plus-square"></i>
+          <p>
+            Extras
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Login & Register v1
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/login.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Login v1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/register.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Register v1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/forgot-password.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Forgot Password v1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/recover-password.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Recover Password v1</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Login & Register v2
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/login-v2.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Login v2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/register-v2.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Register v2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/forgot-password-v2.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Forgot Password v2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% static 'pages/examples/recover-password-v2.html' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Recover Password v2</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/lockscreen.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Lockscreen</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/legacy-user-menu.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Legacy User Menu</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/language-menu.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Language Menu</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/404.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Error 404</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/500.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Error 500</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/pace.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Pace</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/examples/blank.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Blank Page</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'starter.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Starter Page</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-search"></i>
+          <p>
+            Search
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% static 'pages/search/simple.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Simple Search</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% static 'pages/search/enhanced.html' %}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Enhanced</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-header">MISCELLANEOUS</li>
+      <li class="nav-item">
+        <a href="iframe.html" class="nav-link">
+          <i class="nav-icon fas fa-ellipsis-h"></i>
+          <p>Tabbed IFrame Plugin</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+          <i class="nav-icon fas fa-file"></i>
+          <p>Documentation</p>
+        </a>
+      </li>
+      <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-circle nav-icon"></i>
+          <p>Level 1</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-circle"></i>
+          <p>
+            Level 1
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview"> <!-- treeview -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Level 2</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Level 2
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview"> <!-- treeview2 -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Level 3</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Level 3</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-dot-circle nav-icon"></i>
+                  <p>Level 3</p>
+                </a>
+              </li>
+            </ul> <!-- treeview2 -->
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Level 2</p>
+            </a>
+          </li>
+        </ul> <!-- treeview -->
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-circle nav-icon"></i>
+          <p>Level 1</p>
+        </a>
+      </li>
+      <li class="nav-header">LABELS</li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon far fa-circle text-danger"></i>
+          <p class="text">Important</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon far fa-circle text-warning"></i>
+          <p>Warning</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon far fa-circle text-info"></i>
+          <p>Informational</p>
+        </a>
+      </li>
+
+            </ul>   <!-- Add'l dashboar -->
+            <li class="nav-item menu-closed">
+              <a href="{% url 'admin_home' %}" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard-sidebar
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">  <!-- Dashboards -->
+                <li class="nav-item">
+                  <a href="{% static 'index.html' %}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Dashboard v1</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'index2.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Dashboard v2</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% static 'index3.html' %}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Dashboard v3</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </li>
+
+
+        </ul>   <!-- /.top ul -->
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+
+
+
+   <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+ <!-- Content Header (Page header) -->
+
+ <div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+       
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard v1</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+  {% block main_content %} {% endblock main_content %}
+
+</div> <!-- content wrapper -->
+
+<!-- content_footer -->
+{% include 'hod_templates/footer.html' %}
+  <!-- content_footer -->
  
-</header>
-<main>
-    <h1 class="display-4 fw-normal">{{ title }} </h1>
-    
-      {% block content %}
-      {% endblock content%}
-    
-</main>
-</div> 
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  </body>
-  {% include 'partials/_footer.html' %}
-  <footer></footer>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+
+  </aside>
+  <!-- /.control-sidebar -->
+</div> <!-- ./wrapper -->
+
+<!-- jQuery -->
+{% include 'hod_templates/custom_js.html' %}
+
+{% block custom_js %}
+{% endblock custom_js %}
+</body>
 </html>

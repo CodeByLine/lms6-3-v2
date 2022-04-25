@@ -24,6 +24,8 @@ from django.urls import reverse
 app_name = 'accounts'
 urlpatterns = [
     path('demo/', views.showDemoPage, name='demo'),
+    path('accounts/account/', views.account, name='account'),
+    path('accounts/accounts_home/', views.account, name='accounts_home'),
     path('signup_admin/', views.signup_admin, name='signup_admin'),
     path('signup_staff/', views.signup_staff, name='signup_staff'),
     path('signup_student/', views.signup_student, name='signup_student'),

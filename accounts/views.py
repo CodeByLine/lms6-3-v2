@@ -15,6 +15,12 @@ def showDemoPage(request):
 class HelloView(TemplateView):
     template_name = 'hello.html'
 
+def account(request):
+    return HttpResponse("<h2>Placeholder</h2>")
+
+def accounts_home(request):
+    return HttpResponse("<h2>Placeholder</h2>")
+    
 def showLoginPage(request):
     return render(request,"login_page.html")
 
@@ -26,22 +32,22 @@ def doLogin(request):
         if user!=None:
             login(request,user)
             if user.user_type=="1":
-                return HttpResponseRedirect('/admin_home')
+                return HttpResponseRedirect('admin_home')
             elif user.user_type=="2":
                 return HttpResponseRedirect(reverse("staff_home"))
                 # return HttpResponse("staff login "+str(user.user_type))  # check as string
                 
             else:
-                return HttpResponseRedirect(reverse("student_home"))
-                # return HttpResponse("student login "+str(user.user_type))  # check as string
+                # return HttpResponseRedirect(reverse("student_home"))
+                return HttpResponse("student login-user_type "+str(user.user_type))  # check as string
                 
         else:
             messages.error(request, "Invalid Login Details")
             return HttpResponseRedirect("/")
     
 
-def admin_home(request):
-    return render(request,"hod_templates/home_content.html")
+# def admin_home(request): # HODVIews
+#     return render(request,"hod_templates/home_content.html")
 
 def GetUserDetails(request):
     if request.user!=None:
