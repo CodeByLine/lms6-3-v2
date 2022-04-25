@@ -1,0 +1,32 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Edit Course Details
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8" style="margin: 0 auto;">
+            <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Update {{course.course_name}}</h3>
+                </div>
+                <div class="m-5">
+                  <form method="post">{% csrf_token %}
+                      {{ form.as_p }}
+                      <input type="submit" value="Update">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>        
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
+
+

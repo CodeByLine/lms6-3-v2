@@ -1,0 +1,45 @@
+
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Course Detail
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">         
+              <div class="col-md-8" style="margin: 0 auto;">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Course ID: {{course.id}} </h3>
+  
+                    <div class="card-tools">      <!-- search -->
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                          <button type="button" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    
+                  </div>    <!-- ./card-header -->
+
+                  <div class="card-body m-2">
+                      <h1 class="mb-5">{{course.course_name}}</h1>
+                                And {{ course.staff_course }} {{ subject.course_subject }}
+                  <h5 class="mb-5">Created on: <span style="margin-right: 2rem; font-weight: 300;">{{course.created_at}}</span> Updated on:<span style="font-weight: 300;">{{course.updated_at}}</span></h5>
+
+                <a href="{% url 'course_list' %}" class="btn btn-success">All Courses</a>
+                      <a href="{% url 'course_update' course.id %}" class="btn btn-info mx-3">Edit Course</a>
+                      <a href="{% url 'course_delete' course.id %}" class="btn btn-danger">Delete Course</a>
+            </div> 
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

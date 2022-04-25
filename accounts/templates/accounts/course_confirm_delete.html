@@ -1,0 +1,29 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Edit Course Details
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-8" style="margin: 0 auto;">
+
+                <h3>Note:</h3>
+                  <p> If there are students enrolled, you may not be able to delete a course.</p> 
+                  
+                  <div class="m-5"> 
+                
+                  <form method="post">{% csrf_token %}
+                    <p>Are you sure you want to delete "{{ course.course_name }}"?</p>
+                    {{ form.as_p }}
+                    <input type="submit" value="Confirm">
+                </form>
+                </div>
+</div>
+</div>
+</div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

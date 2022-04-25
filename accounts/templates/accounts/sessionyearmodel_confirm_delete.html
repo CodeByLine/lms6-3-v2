@@ -1,0 +1,33 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Edit Course Details
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-8" style="margin: 0 auto;">
+
+                
+                  <div class="m-5"> 
+                    <h3>Note:</h3>
+                  <h5> Complicated ... you may not be able to delete a session.</h5> 
+                  <br>
+                
+                  <form method="post">{% csrf_token %}
+                    <h3>Are you sure you want to delete <strong> Session (ID {{ object.id}})</strong>: </h3>
+                    <h4>"{{ object.session_start_year }}-{{ object.session_start_year }}"?</h4>
+                    {{ form.as_p }}
+                    <br>
+                    <input type="submit" value="Confirm" class="btn btn-danger">
+                    <a href="{% url 'session_list' %}" class="btn btn-primary">Cancel</a>
+                </form>
+                </div>
+</div>
+</div>
+</div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

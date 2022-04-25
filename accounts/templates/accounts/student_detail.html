@@ -1,0 +1,51 @@
+
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Student Detail
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">         
+              <div class="col-md-8" style="margin: 0 auto;">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Student ID: {{student.id}}</h3>
+  
+                    <div class="card-tools">      <!-- search -->
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                          <button type="button" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    
+                  </div>    <!-- ./card-header -->
+
+                  <div class="card-body">
+                      <h1 class="mb-5">{{student.admin.first_name}} {{student.admin.last_name}}</h1>
+
+                      <p>In Class: <a href="{% url 'course_detail' student.course_id.id %}">{{ student.course_id }}</a> </p>
+                      <p>Session ID: {{ student.session_year_id.id}}
+                          ({{ student.session_year_id.session_start_year}} –
+                          {{ student.session_year_id.session_end_year}}) </p>
+                     
+                  <h5 class="mb-5">Created on: <span style="margin-right: 2rem; font-weight: 300;">{{student.created_at}}</span> Updated on: <span style="font-weight: 300;">{{student.updated_at}}</span></h5>
+
+          
+                <a href="{% url 'student_list' %}" class="btn btn-success mr-3">Go to All Students</a>  <a href="{% url 'student_update' student.id %}" class="btn btn-info mr-3">Edit Student</a> <a href="{% url 'student_delete' student.id %}" class="btn btn-danger">Delete Student</a>
+            </div> 
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
+

@@ -1,0 +1,46 @@
+
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Add Course
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <div class="row">         
+            <div class="col-md-8" style="margin: 0 auto;">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Session ID: Session ID: {{ object.id }}</h3>
+
+                  <div class="card-tools">      <!-- search -->
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                </div>    <!-- ./card-header -->
+
+                <div class="card-body m-2">
+                    <h1 class="mb-5">Session Dates:</h1>
+                    <h5 class="mb-3">Session starts: <span style='font-weight: 300'> {{ object.session_start_year }}</span> </h5> 
+                    <h5 class="mb-5">Session Ends: <span style='font-weight: 300; margin-left: 0.3rem;'> {{object.session_end_year}} </span> </h5> 
+                    
+              <a href="{% url 'session_list' %}" class="btn btn-success mr-3">Go to All Sessions</a> <a href="{% url 'session_update' object.id %}" class="btn btn-info mr-3">Delete Session</a> <a href="{% url 'session_delete' object.id %}" class="btn btn-danger">Delete Session</a>
+          </div> 
+        </div>
+        </div>
+    </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+                

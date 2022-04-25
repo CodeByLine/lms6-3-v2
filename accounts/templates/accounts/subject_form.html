@@ -1,0 +1,36 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Add Subject
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-8" style="margin: 0 auto;">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add /Edit Subject | Subject Form</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <div class="m-5">
+                <form method="post">{% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" value="Save">
+              </form>
+          
+            </div>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

@@ -1,0 +1,49 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+Add Session Year
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add A Session Year (Form)</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <div class="m-5">
+              <form method="post">{% csrf_token %}
+                {{ form | crispy }}
+                <input type="submit" value="Save">
+            </form>
+            </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+{% block custom_js %}
+<!--  
+<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/media/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+         $("#id_FieldName1").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_FieldName2").datepicker({ dateFormat: 'yy-mm-dd' });
+  }); -->
+ </script>
+{% endblock custom_js %}

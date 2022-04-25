@@ -1,0 +1,47 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_title %}
+Add Staff
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-8" style="margin: 0 auto;">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add / Edit Staff - Staff Form class view</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <div class="m-5">
+                <form method="post">{% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" value="Save">
+
+                  <div class="form-group">
+                    {% if messages %}
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+              </form>
+          
+            </div>
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
