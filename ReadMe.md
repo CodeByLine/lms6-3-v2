@@ -1,4 +1,4 @@
-This repo was my effort to restore a broken app (lms6-v2), which fell apart when I attempted to rename a model and all its relations.
+This repo was my latest effort to restore a broken app (lms6-v2, which fell apart when I attempted to rename a model and all its relations) and learn how to use Django's CustomUser.
 
 Notes from previous version:
 This project is an extension of my exercise called lms6 (CustomUser - register, login, logout, password change/rest.)
