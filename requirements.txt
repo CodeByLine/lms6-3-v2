@@ -1,5 +1,5 @@
 asgiref==3.5.0
-Django==4.0.4
+Django==4.0.9
 django-bootstrap-form==3.4
 django-crispy-forms==1.14.0
 python-dotenv==0.20.0
